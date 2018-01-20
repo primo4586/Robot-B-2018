@@ -15,10 +15,12 @@ public class Climber extends Subsystem {
 	Jaguar climbMotor2;
 	Solenoid openRightPlatfrom;
 	Solenoid openLeftPlatfrom;
+	boolean isOpen;
 	
 	 //הפעולה מגדירה את המנועים
 	public Climber(Jaguar climbMotor1,Jaguar climbMotor2 ,Compressor compressor, Solenoid openLeftPlatfrom, Solenoid openRightPlatfrom) 
 	{
+		this.isOpen=false;
 		this.climbMotor1 =climbMotor1;
 		this.climbMotor2 =climbMotor2;
 		this.compressor = compressor;

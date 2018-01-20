@@ -1,29 +1,19 @@
 package org.usfirst.frc.team4586.robot.commands;
 
 import org.usfirst.frc.team4586.robot.OI;
-import org.usfirst.frc.team4586.robot.Robot;
-import org.usfirst.frc.team4586.robot.subsystems.Climber;
 import org.usfirst.frc.team4586.robot.subsystems.CubeSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class ClimbByJoystick extends Command {
-
-	private Climber climber;
-	private CubeSystem cubeSystem;
-	private OI oi;
-	private double speed;
-	
-    public ClimbByJoystick() {
+public class LiftCubByJoystick extends Command {
+	 CubeSystem cubeSystem;
+	 OI oi;
+    public LiftCubByJoystick() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.climber = Robot.climber;
-    	this.cubeSystem = Robot.cubeSystem;
-    	this.oi = Robot.m_oi;
     }
 
     // Called just before this Command runs the first time
@@ -32,11 +22,6 @@ public class ClimbByJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	this.speed = this.oi.joystickOpertor.getRawAxis(1) * SmartDashboard.getNumber("Elavator Speed",0);
-    	climber.setSpeedClimb(this.speed);
-    	cubeSystem.setSpeedElevators(this.speed);
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

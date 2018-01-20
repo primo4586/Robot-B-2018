@@ -40,8 +40,11 @@ public class Robot extends TimedRobot {
 	 */
 	//@Override
 	public void robotInit() {
-		climber = new Climber(RobotMap.climbMotor1, RobotMap.climbMotor2, RobotMap.compressor, RobotMap.openLeftPlatfrom, RobotMap.openRightPlatfrom);
-		cubeSystem = new CubeSystem(RobotMap.solenoidCube2, RobotMap.solenoidCube1, RobotMap.compressor, RobotMap.elevatorsMotor, RobotMap.scaleSensor, RobotMap.switchSensor, RobotMap.floorSensor);
+		climber = new Climber(RobotMap.climbMotor1, RobotMap.climbMotor2, RobotMap.compressor,
+				RobotMap.openLeftPlatfrom, RobotMap.openRightPlatfrom);
+		
+		cubeSystem = new CubeSystem(RobotMap.solenoidCube2, RobotMap.solenoidCube1,
+				RobotMap.compressor, RobotMap.elevatorsMotor, RobotMap.scaleSensor, RobotMap.switchSensor, RobotMap.floorSensor);
 		m_oi = new OI();
 		RobotMap.Init();
 		m_chooser.addDefault("Default Auto", new ExampleCommand());

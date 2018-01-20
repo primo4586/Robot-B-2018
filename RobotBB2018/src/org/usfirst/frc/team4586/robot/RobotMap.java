@@ -45,6 +45,7 @@ public class RobotMap {
 	public static Compressor compressor;
 	public static Solenoid solenoidCube1;
 	public static Solenoid solenoidCube2;
+	public static Solenoid cubPusher;
 	
 	public static void Init()
 	{
