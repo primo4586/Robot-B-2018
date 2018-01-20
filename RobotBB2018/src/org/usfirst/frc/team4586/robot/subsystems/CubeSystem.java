@@ -30,20 +30,28 @@ public class CubeSystem extends Subsystem {
 		this.floorSensor=floorSensor;
 		
 	}
-	//בודק אם המכנות פתוחות
+	//בודק אם הבוכנה השמאלית פתוחה 
 	public boolean isOpened()
 	{
-		return (solenoid1.get() && solenoid2.get());
+		return (solenoid1.get() || solenoid2.get());
 	}
+	
 	//אם הבוכנות פתוחות אז זה סוגר אותן אותן
-	public void setPiston(boolean isOpsened) 
+	public void setPiston1(boolean isOpsened) 
 	{
 		if(isOpsened){
-			solenoid1.set(false);
 			solenoid2.set(false);
 		}
 		else{
 			solenoid1.set(true);
+		}
+	}
+	public void setPiston2(boolean isOpsened) 
+	{
+		if(isOpsened){
+			solenoid1.set(false);
+		}
+		else{
 			solenoid2.set(true);
 		}
 	}

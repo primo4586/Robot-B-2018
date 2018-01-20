@@ -11,22 +11,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class LiftToFloor extends Command {
-	CubeSystem cubeSystem;
-	 OI oi;
+	private CubeSystem cubeSystem;
     public LiftToFloor() {
     	 this.cubeSystem=Robot.cubeSystem;
-	        this.oi=Robot.m_oi;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	cubeSystem.setSpeedElevators(-SmartDashboard.getNumber("Elavator Speed",0));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	cubeSystem.setSpeedElevators(-SmartDashboard.getNumber("Elavator Speed",0));
     	  
     }
 

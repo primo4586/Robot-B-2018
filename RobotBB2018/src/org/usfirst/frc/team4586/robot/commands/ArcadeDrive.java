@@ -2,7 +2,8 @@ package org.usfirst.frc.team4586.robot.commands;
 
 import org.usfirst.frc.team4586.robot.OI;
 import org.usfirst.frc.team4586.robot.Robot;
-import org.usfirst.frc.team4586.robot.subsystems.CubeSystem;
+import org.usfirst.frc.team4586.robot.RobotMap;
+import org.usfirst.frc.team4586.robot.subsystems.Driver;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,11 +11,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class LiftToScale extends Command {
-	private CubeSystem cubeSystem;
-
-    public LiftToScale() {
-    	 this.cubeSystem=Robot.cubeSystem;
+public class ArcadeDrive extends Command {
+	 private OI oi;
+	 private Driver driver;
+	 private double speed;
+	 private double rotation; 
+	 
+    public ArcadeDrive() {
+   	 this.driver=Robot.driver;
+     this.oi=Robot.m_oi;
+     
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -25,22 +31,25 @@ public class LiftToScale extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	cubeSystem.setSpeedElevators(SmartDashboard.getNumber("Elavator Speed",0));
+   	this.speed = SmartDashboard.getNumber("Driving direction", 1)*((this.oi.joystickDriver.getRawAxis(1) * SmartDashboard.getNumber("Max speed",0))+oi.joystickDriver.getRawAxis(2)*0.3-oi.joystickDriver.getRawAxis(3)*0.3);
+   	this.rotation = SmartDashboard.getNumber("Driving direction", 1)*((this.oi.joystickDriver.getRawAxis(4) * SmartDashboard.getNumber("Max speed",0))+oi.joystickDriver.getRawAxis(2)*0.3-oi.joystickDriver.getRawAxis(3)*0.3);
+    this.driver.arcadeDrive(this.speed, this.rotation);
     }
+    
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return cubeSystem.getScaleSensor();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	cubeSystem.setSpeedElevators(0);
+    	speed = 0;
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	cubeSystem.setSpeedElevators(0);
+    	speed = 0;
     }
 }

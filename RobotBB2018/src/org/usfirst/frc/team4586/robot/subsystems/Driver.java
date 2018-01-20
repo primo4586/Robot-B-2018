@@ -3,7 +3,9 @@ package org.usfirst.frc.team4586.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  *
@@ -18,8 +20,10 @@ public class Driver extends Subsystem {
 	Jaguar rightBackMotor;
 	AnalogGyro gyro;
 	Encoder drivingEncoder ;
+	SpeedControllerGroup rightController, leftController;
+	DifferentialDrive diffDrive;
 	 //#############
-	public void arcadeDrive(Jaguar leftFrontMotor,Jaguar leftBackMotor ,Jaguar rightFrontMotor,Jaguar rightBackMotor ,AnalogGyro gyro,Encoder drivingEncoder) 
+	public Driver(Jaguar leftFrontMotor,Jaguar leftBackMotor ,Jaguar rightFrontMotor,Jaguar rightBackMotor ,AnalogGyro gyro,Encoder drivingEncoder) 
 	{
 		this.leftFrontMotor = leftFrontMotor;
 		this.leftBackMotor = leftBackMotor;
@@ -27,6 +31,9 @@ public class Driver extends Subsystem {
 		this.rightBackMotor =rightBackMotor;
 		this.gyro=gyro;
 		this.drivingEncoder=drivingEncoder;
+		this.rightController = new SpeedControllerGroup(this.rightBackMotor, this.rightFrontMotor);
+		this.leftController = new SpeedControllerGroup(this.leftBackMotor, this.leftFrontMotor);
+		this.diffDrive = new DifferentialDrive(this.leftController, this.rightController);
 	}
 	
 	
@@ -90,6 +97,11 @@ public class Driver extends Subsystem {
 		public void resetEncoder()
 		{
 			this.drivingEncoder.reset();
+		}
+		
+		public void arcadeDrive(double speed, double rotation)
+		{
+			this.diffDrive.arcadeDrive(speed, rotation);
 		}
 
 	public void initDefaultCommand() {

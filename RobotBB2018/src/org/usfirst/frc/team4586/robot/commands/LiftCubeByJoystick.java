@@ -13,11 +13,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 //ANALOG CONTROL IN ELEVATOR
 
-public class LiftCubByJoystick extends Command {
-	 CubeSystem cubeSystem;
-	 OI oi;
-	 double speed;
-    public LiftCubByJoystick() {
+public class LiftCubeByJoystick extends Command {
+	 private CubeSystem cubeSystem;
+	 private OI oi;
+	 private double speed;
+	 
+    public LiftCubeByJoystick() {
         this.cubeSystem=Robot.cubeSystem;
         this.oi=Robot.m_oi;
     }
@@ -29,9 +30,10 @@ public class LiftCubByJoystick extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	this.speed = this.oi.joystickOpertor.getRawAxis(1) * SmartDashboard.getNumber("Elavator Speed",0);
-    	if(cubeSystem.getScaleSensor()&& speed>0 || cubeSystem.getFloorSensor()&& speed<0)
-    		speed=0;
-    	cubeSystem.setSpeedElevators(speed);
+    	if((cubeSystem.getScaleSensor() && speed > 0) || (cubeSystem.getFloorSensor() && speed < 0)) {
+    		this.speed=0;
+    	}
+    	this.cubeSystem.setSpeedElevators(this.speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,10 +43,12 @@ public class LiftCubByJoystick extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	this.speed = 0;
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	this.speed = 0;
     }
 }

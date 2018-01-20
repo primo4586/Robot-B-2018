@@ -24,7 +24,7 @@ public class LiftToSwitch extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	cubeSystem.setSpeedElevators(speedMol*SmartDashboard.getNumber("Elavator Speed",0));
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run

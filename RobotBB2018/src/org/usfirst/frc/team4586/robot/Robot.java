@@ -10,8 +10,10 @@ package org.usfirst.frc.team4586.robot;
 import org.usfirst.frc.team4586.robot.commands.ExampleCommand;
 import org.usfirst.frc.team4586.robot.subsystems.Climber;
 import org.usfirst.frc.team4586.robot.subsystems.CubeSystem;
+import org.usfirst.frc.team4586.robot.subsystems.Driver;
 import org.usfirst.frc.team4586.robot.subsystems.ExampleSubsystem;
 
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -31,6 +33,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	public static Climber climber;
 	public static CubeSystem cubeSystem;
+	public static Driver driver;
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -46,6 +49,8 @@ public class Robot extends TimedRobot {
 		cubeSystem = new CubeSystem(RobotMap.solenoidCube2, RobotMap.solenoidCube1,
 				RobotMap.compressor, RobotMap.elevatorsMotor, RobotMap.scaleSensor, RobotMap.switchSensor, RobotMap.floorSensor);
 		m_oi = new OI();
+		
+		driver = new Driver(RobotMap.leftFrontMotor,RobotMap. leftBackMotor,RobotMap. rightFrontMotor,RobotMap. rightBackMotor , RobotMap.gyro,RobotMap.drivingEncoder);
 		RobotMap.Init();
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -82,6 +87,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
+		
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
