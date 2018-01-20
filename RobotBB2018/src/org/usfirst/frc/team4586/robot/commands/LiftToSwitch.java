@@ -10,41 +10,43 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-
-//ANALOG CONTROL IN ELEVATOR
-
-public class LiftCubByJoystick extends Command {
-	 CubeSystem cubeSystem;
+public class LiftToSwitch extends Command {
+	CubeSystem cubeSystem;
 	 OI oi;
-	 double speed;
-    public LiftCubByJoystick() {
-        this.cubeSystem=Robot.cubeSystem;
-        this.oi=Robot.m_oi;
+	 double speedMol;
+	 boolean ok;
+    public LiftToSwitch() {
+   	 this.cubeSystem=Robot.cubeSystem;
+     this.oi=Robot.m_oi;
+    this.speedMol=-1;
+     // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	cubeSystem.setSpeedElevators(speedMol*SmartDashboard.getNumber("Elavator Speed",0));
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.speed = this.oi.joystickOpertor.getRawAxis(1) * SmartDashboard.getNumber("Elavator Speed",0);
-    	if(cubeSystem.getScaleSensor()&& speed>0 || cubeSystem.getFloorSensor()&& speed<0)
-    		speed=0;
-    	cubeSystem.setSpeedElevators(speed);
+    	if(cubeSystem.getFloorSensor())
+    		speedMol=1;
+    	cubeSystem.setSpeedElevators(speedMol*SmartDashboard.getNumber("Elavator Speed",0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return cubeSystem.getSwitchSensor();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	cubeSystem.setSpeedElevators(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	cubeSystem.setSpeedElevators(0);
     }
 }

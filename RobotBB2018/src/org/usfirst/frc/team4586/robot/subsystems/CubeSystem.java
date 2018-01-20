@@ -3,7 +3,6 @@ package org.usfirst.frc.team4586.robot.subsystems;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,6 +18,7 @@ public class CubeSystem extends Subsystem {
 	DigitalInput switchSensor;
 	DigitalInput floorSensor;
 	
+	
 	public CubeSystem(Solenoid solenoid2,Solenoid solenoid1,Compressor compressor, Victor elevatorsMotor, DigitalInput scaleSensor, DigitalInput switchSensor, DigitalInput floorSensor)
 	{
 		this.compressor = compressor;
@@ -28,6 +28,7 @@ public class CubeSystem extends Subsystem {
 		this.scaleSensor = scaleSensor;
 		this.switchSensor=switchSensor;
 		this.floorSensor=floorSensor;
+		
 	}
 	//בודק אם המכנות פתוחות
 	public boolean isOpened()

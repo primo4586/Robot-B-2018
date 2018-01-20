@@ -5,38 +5,36 @@ import org.usfirst.frc.team4586.robot.Robot;
 import org.usfirst.frc.team4586.robot.subsystems.CubeSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-
-//ANALOG CONTROL IN ELEVATOR
-
-public class LiftCubByJoystick extends Command {
-	 CubeSystem cubeSystem;
+public class CatchCube extends Command {
+	CubeSystem cubeSystem;
 	 OI oi;
-	 double speed;
-    public LiftCubByJoystick() {
-        this.cubeSystem=Robot.cubeSystem;
-        this.oi=Robot.m_oi;
+
+    public CatchCube() {
+   	 this.cubeSystem=Robot.cubeSystem;
+     this.oi=Robot.m_oi;
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
+		cubeSystem.setPiston(cubeSystem.isOpened());	
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	this.speed = this.oi.joystickOpertor.getRawAxis(1) * SmartDashboard.getNumber("Elavator Speed",0);
-    	if(cubeSystem.getScaleSensor()&& speed>0 || cubeSystem.getFloorSensor()&& speed<0)
-    		speed=0;
-    	cubeSystem.setSpeedElevators(speed);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
