@@ -22,7 +22,7 @@ public class Driver extends Subsystem {
 	Encoder drivingEncoder ;
 	SpeedControllerGroup rightController, leftController;
 	DifferentialDrive diffDrive;
-	 //#############
+
 	public Driver(Jaguar leftFrontMotor,Jaguar leftBackMotor ,Jaguar rightFrontMotor,Jaguar rightBackMotor ,AnalogGyro gyro,Encoder drivingEncoder) 
 	{
 		this.leftFrontMotor = leftFrontMotor;
@@ -38,67 +38,65 @@ public class Driver extends Subsystem {
 	
 	
 	
-	 //#############
-	public void stopAllWheels()
-	{
-		this.leftBackMotor.set(0);
-		this.leftFrontMotor.set(0);
-		this.rightFrontMotor.set(0);
-		this.rightBackMotor.set(0);
-	}
+
 	
-	
-	
-	 //#############
-	public double getGyroAngle()
-	{
-		return this.gyro.getAngle();
-	}
-	
-	
-	
-	  //#############
+	//wheels
 	  public double getWheelSpeedLeftFront() 
 	  {
 		  return leftFrontMotor.get();
 	  }
-	  //#############
 	  public double getWheelSpeedLeftBack() 
 	  {
 		  return leftBackMotor.get();
 	  }
-	  //#############
 	  public double getWheelSpeedRightBack() 
 	  {
 		  return rightBackMotor.get();
 	  }
-	  //#############
 	  public double getWheelSpeedRightFront() 
 	  {
 		  return rightFrontMotor.get();
 	  }
+	  //stops the wheels
+	  public void stopAllWheels()
+		{
+			this.leftBackMotor.set(0);
+			this.leftFrontMotor.set(0);
+			this.rightFrontMotor.set(0);
+			this.rightBackMotor.set(0);
+		}
 	  
-	  	//#############
+	  //gyro
 		public void resetGyro()
 		{
 			this.gyro.reset();
 		}
-		 //#############
+		public double getGyroAngle()
+		{
+			return this.gyro.getAngle();
+		}
+		//calibrates the gyro
+		public void calibrateGyro()
+		{
+			this.gyro.calibrate();
+		}
+		
+
+		//encoder
 		public double getSpeedEncoder()
 		{
 			return drivingEncoder.get();
 		}
-		
 		public double getDistenceEncoder()
 		{
 			return this.drivingEncoder.getDistance();
 		}
-		
 		public void resetEncoder()
 		{
 			this.drivingEncoder.reset();
 		}
 		
+		//drive
 		public void arcadeDrive(double speed, double rotation)
 		{
 			this.diffDrive.arcadeDrive(speed, rotation);

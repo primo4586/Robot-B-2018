@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ *	Climber System
  */
 public class Climber extends Subsystem {
 	Compressor compressor;
@@ -16,7 +16,7 @@ public class Climber extends Subsystem {
 	Solenoid openLeftPlatfrom;
 	boolean isOpen;
 	
-	 //הפעולה מגדירה את המנועים
+
 	public Climber(Jaguar climbMotor1,Jaguar climbMotor2 ,Compressor compressor, Solenoid openLeftPlatfrom, Solenoid openRightPlatfrom) 
 	{
 		this.isOpen=false;
@@ -26,48 +26,46 @@ public class Climber extends Subsystem {
 		this.openRightPlatfrom = openRightPlatfrom;
 		this. openLeftPlatfrom = openLeftPlatfrom;
 	}
-	//בודק אם המכנות פתוחות
-		public boolean isOpened()
-		{
-			return (openRightPlatfrom.get() && openLeftPlatfrom.get());
-		}
-		//אם הבוכנות פתוחות אז זה סוגר אותן אותן
-		public void setPiston(boolean isOpsened) 
-		{
-			if(isOpsened){
-				openRightPlatfrom.set(false);
-				openLeftPlatfrom.set(false);
-			}
-			else{
-				openRightPlatfrom.set(true);
-				openLeftPlatfrom.set(true);
-			}
-		}
+
+	//checks if the platforms' pistons are opened
+	public boolean isOpened()
+	{
+		return (openRightPlatfrom.get() && openLeftPlatfrom.get());
+	}
+	
+	//set the pistons state
+	public void setPiston(boolean isOpsened) 
+	{
 		
-	//הפעולה שמה ערך מהירות בכל מנועה
+			openRightPlatfrom.set(!isOpsened);
+			openLeftPlatfrom.set(!isOpsened);
+	}
+			
+		
+	
 	public void setSpeedClimb(double speed)
 	{
 		this.climbMotor1.set(speed);
 		this.climbMotor2.set(speed);
 	}
-	//אותו דבר כמו הקודם
-	public void setSpeedPlatforms(boolean open)
+
+	public void setPlatforms(boolean open)
 	{
 		this.openLeftPlatfrom.set(open);
 		this.openRightPlatfrom.set(open);
 	}
-	//אותו דבר כמו הקודם רק לשמאל
-	public void setSpeedPlatformsLeft(boolean open)
+
+	public void setPlatformLeft(boolean open)
 	{
 		this.openLeftPlatfrom.set(open);
 	
 	}
-	//אותו דבר כמו הקודם רק לביבי 
-		public void setSpeedPlatformsRight(boolean open)
-		{
-			this.openRightPlatfrom.set(open);
-		
-		}
+	
+
+	public void setPlatformRight(boolean open)
+	{
+		this.openRightPlatfrom.set(open);
+	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 

@@ -7,6 +7,18 @@
 
 package org.usfirst.frc.team4586.robot;
 
+import org.omg.CORBA.DynAnyPackage.Invalid;
+import org.usfirst.frc.team4586.robot.commands.CalibrateGyro;
+import org.usfirst.frc.team4586.robot.commands.CatchCube;
+import org.usfirst.frc.team4586.robot.commands.Climb;
+import org.usfirst.frc.team4586.robot.commands.Invert;
+import org.usfirst.frc.team4586.robot.commands.LiftToFloor;
+import org.usfirst.frc.team4586.robot.commands.LiftToScale;
+import org.usfirst.frc.team4586.robot.commands.LiftToSwitch;
+import org.usfirst.frc.team4586.robot.commands.OpenPlatforms;
+import org.usfirst.frc.team4586.robot.commands.ResetEncoder;
+import org.usfirst.frc.team4586.robot.commands.StopAllMotors;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -15,14 +27,15 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	//driver
 	public Joystick joystickDriver;
 	public JoystickButton stopAllMotors;
 	public JoystickButton invert;
 	public JoystickButton calibrateGyro;
 	public JoystickButton resetEncoder;
 	
-	//אל תחשבו אפילו על לקרב את הכפתורים של המפעיל לשל הנהג!
-	public Joystick joystickOpertor; //השלט של המפעיל ,כניראה רשום פה עם שגיעת כתיב
+	//operator
+	public Joystick joystickOpertor; 
 	public JoystickButton liftToScale;
 	public JoystickButton liftToFloor;
 	public JoystickButton liftToSwitch;
@@ -39,7 +52,6 @@ public class OI {
 	calibrateGyro = new JoystickButton(joystickDriver , 6);
 	resetEncoder = new JoystickButton(joystickDriver , 2);
 	
-	// גם לא פה!
 	joystickOpertor = new Joystick(1);
 	liftToScale = new JoystickButton(joystickOpertor , 5);
 	liftToFloor = new JoystickButton(joystickOpertor , 4);
@@ -47,5 +59,27 @@ public class OI {
 	climb = new JoystickButton(joystickOpertor , 6);
 	catchCube = new JoystickButton(joystickOpertor , 1);
 	openPlatform = new JoystickButton(joystickOpertor , 2);
+	
+	//driver commands
+	stopAllMotors.whenPressed(new StopAllMotors());
+	invert.whenPressed(new Invert());
+	calibrateGyro.whenPressed(new CalibrateGyro());
+	resetEncoder.whenPressed(new ResetEncoder());
+	
+	//operator commands
+	liftToScale.whenPressed(new LiftToScale());
+	liftToFloor.whenPressed(new LiftToFloor());
+	liftToSwitch.whenPressed(new LiftToSwitch());
+	climb.whenPressed(new Climb());
+	catchCube.whenPressed(new CatchCube());
+	openPlatform.toggleWhenPressed(new OpenPlatforms());
+
+	
 	}
+	
+
+	
+
 }
+
+

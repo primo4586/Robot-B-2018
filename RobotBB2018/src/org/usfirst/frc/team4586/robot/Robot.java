@@ -108,6 +108,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashBoardPereodic();
 	}
 
 	@Override
@@ -127,6 +128,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashBoardPereodic();
 	}
 
 	/**
@@ -139,7 +141,13 @@ public class Robot extends TimedRobot {
 	public void SmartDashBoardInit()
 	{
 		SmartDashboard.putNumber("Elavator Speed", 0.7);
+		SmartDashboard.putNumber("Driving direction", 1);
+	   	SmartDashboard.putNumber("Max speed",0);
+	   	SmartDashboard.putNumber("Speed climb back", 0);
+	   	SmartDashboard.putNumber("Speed climb foreward", 0);
+	   	
 	}
+	
 	
 	public void SmartDashBoardPereodic()
 	{

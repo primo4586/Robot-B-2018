@@ -30,13 +30,14 @@ public class CubeSystem extends Subsystem {
 		this.floorSensor=floorSensor;
 		
 	}
-	//בודק אם הבוכנה השמאלית פתוחה 
+	
+	//checks if the platforms' pistons are opened
 	public boolean isOpened()
 	{
 		return (solenoid1.get() || solenoid2.get());
 	}
 	
-	//אם הבוכנות פתוחות אז זה סוגר אותן אותן
+	//set the pistons state
 	public void setPiston1(boolean isOpsened) 
 	{
 		if(isOpsened){
@@ -55,17 +56,19 @@ public class CubeSystem extends Subsystem {
 			solenoid2.set(true);
 		}
 	}
-	//קובע את מהירות המעלית
+
+	//elevator's speed
 	public void setSpeedElevators(double speed)
 	{
 		this.elevatorsMotor.set(speed);
 	}
-//מקבל את מהירות המעלית
+
 	public double getSpeedElevators()
 	{
 		return this.elevatorsMotor.getSpeed();
 	}
-	//מקבל את הערך של חישן רצפה וכל מה שאחריו עד לתיעוד הבא אותו רעיון
+
+	//sensors
 	public boolean getFloorSensor()
 	{
 		return floorSensor.get();
