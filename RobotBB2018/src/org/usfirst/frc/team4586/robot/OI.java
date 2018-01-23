@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team4586.robot;
 
-import org.omg.CORBA.DynAnyPackage.Invalid;
 import org.usfirst.frc.team4586.robot.commands.CalibrateGyro;
 import org.usfirst.frc.team4586.robot.commands.CatchCube;
 import org.usfirst.frc.team4586.robot.commands.Climb;

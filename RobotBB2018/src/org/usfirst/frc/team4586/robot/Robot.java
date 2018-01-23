@@ -7,13 +7,14 @@
 
 package org.usfirst.frc.team4586.robot;
 
+import org.usfirst.frc.team4586.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team4586.robot.commands.ExampleCommand;
+import org.usfirst.frc.team4586.robot.commands.LiftCubeByJoystick;
 import org.usfirst.frc.team4586.robot.subsystems.Climber;
 import org.usfirst.frc.team4586.robot.subsystems.CubeSystem;
 import org.usfirst.frc.team4586.robot.subsystems.Driver;
 import org.usfirst.frc.team4586.robot.subsystems.ExampleSubsystem;
 
-import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -120,6 +121,10 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		
+		Scheduler.getInstance().add(new ArcadeDrive());
+		Scheduler.getInstance().add(new LiftCubeByJoystick());
+
 	}
 
 	/**
@@ -142,15 +147,34 @@ public class Robot extends TimedRobot {
 	{
 		SmartDashboard.putNumber("Elavator Speed", 0.7);
 		SmartDashboard.putNumber("Driving direction", 1);
-	   	SmartDashboard.putNumber("Max speed",0);
+	   	SmartDashboard.putNumber("Max speed",0.7);
 	   	SmartDashboard.putNumber("Speed climb back", 0);
 	   	SmartDashboard.putNumber("Speed climb foreward", 0);
 	   	
+	   	//sensors
+	  	SmartDashboard.putNumber("Gyro angle", driver.getGyroAngle());
+	  	//TODO: check if the values are corrected
+	   	SmartDashboard.putNumber("Encoder value " ,driver.getSpeedEncoder());
+		SmartDashboard.putNumber("Encoder rate ", driver.getDistenceEncoder());
+		
+	   	SmartDashboard.putBoolean("in scale",  cubeSystem.getScaleSensor());
+	   	SmartDashboard.putBoolean("in floor", cubeSystem.getFloorSensor());
+	   	SmartDashboard.putBoolean("in switch",  cubeSystem.getSwitchSensor());
+	   	
+	   	SmartDashboard.putData("Teleop Gyro PID", driver.getGyroController());
+	   	SmartDashboard.putBoolean("use gyro", false);
 	}
 	
 	
 	public void SmartDashBoardPereodic()
 	{
+		SmartDashboard.putNumber("Gyro angle", driver.getGyroAngle());
+	  	//TODO: check if the values are corrected
+	   	SmartDashboard.putNumber("Encoder value " ,driver.getSpeedEncoder());
+		SmartDashboard.putNumber("Encoder rate ", driver.getDistenceEncoder());
 		
+	   	SmartDashboard.putBoolean("in scale",  cubeSystem.getScaleSensor());
+	   	SmartDashboard.putBoolean("in floor", cubeSystem.getFloorSensor());
+	   	SmartDashboard.putBoolean("in switch",  cubeSystem.getSwitchSensor());
 	}
 }

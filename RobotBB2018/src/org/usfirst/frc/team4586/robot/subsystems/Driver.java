@@ -3,6 +3,7 @@ package org.usfirst.frc.team4586.robot.subsystems;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -22,6 +23,10 @@ public class Driver extends Subsystem {
 	Encoder drivingEncoder ;
 	SpeedControllerGroup rightController, leftController;
 	DifferentialDrive diffDrive;
+	
+	private DrivingGyroPID gyroSource;
+	private DrivingRotationPID rotationPID;
+	PIDController gyroController;
 
 	public Driver(Jaguar leftFrontMotor,Jaguar leftBackMotor ,Jaguar rightFrontMotor,Jaguar rightBackMotor ,AnalogGyro gyro,Encoder drivingEncoder) 
 	{
@@ -31,14 +36,35 @@ public class Driver extends Subsystem {
 		this.rightBackMotor =rightBackMotor;
 		this.gyro=gyro;
 		this.drivingEncoder=drivingEncoder;
+		this.drivingEncoder.setDistancePerPulse(0.47877872);
 		this.rightController = new SpeedControllerGroup(this.rightBackMotor, this.rightFrontMotor);
 		this.leftController = new SpeedControllerGroup(this.leftBackMotor, this.leftFrontMotor);
 		this.diffDrive = new DifferentialDrive(this.leftController, this.rightController);
+		
+		this.gyroSource = new DrivingGyroPID(this.gyro);
+		this.rotationPID = new DrivingRotationPID();
+		this.gyroController = new PIDController(0, 0, 0, this.gyroSource, this.rotationPID);
 	}
 	
+	public PIDController getGyroController(){
+		return this.gyroController;
+	}
 	
+	public void setSetPoint(double setpoint) {
+		this.gyroController.setSetpoint(setpoint);
+	}
 	
-
+	public void enable() {
+		this.gyroController.enable();
+	}
+	
+	public void disable() {
+		this.gyroController.disable();
+	}
+	
+	public double getRotation() {
+		return this.rotationPID.getRotation();
+	}
 	
 	//wheels
 	  public double getWheelSpeedLeftFront() 
