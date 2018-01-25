@@ -143,8 +143,7 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 	}
 	
-	public void SmartDashBoardInit()
-	{
+	public void SmartDashBoardInit() {
 		SmartDashboard.putNumber("Elavator Speed", 0.7);
 		SmartDashboard.putNumber("Driving direction", 1);
 	   	SmartDashboard.putNumber("Max speed",0.7);
@@ -166,8 +165,7 @@ public class Robot extends TimedRobot {
 	}
 	
 	
-	public void SmartDashBoardPereodic()
-	{
+	public void SmartDashBoardPereodic() {
 		SmartDashboard.putNumber("Gyro angle", driver.getGyroAngle());
 	  	//TODO: check if the values are corrected
 	   	SmartDashboard.putNumber("Encoder value " ,driver.getSpeedEncoder());
