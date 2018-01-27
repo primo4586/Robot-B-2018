@@ -76,8 +76,6 @@ public class OI {
 	climb.whileHeld(new Climb());
 	catchCube.whenPressed(new CatchCube());
 	openPlatform.whenPressed(new OpenPlatforms());
-
-	
 	
 	}
 	
