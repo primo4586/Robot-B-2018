@@ -13,24 +13,39 @@ public class CubeSystem extends Subsystem {
 	Compressor compressor;
 	Solenoid solenoid1;
 	Solenoid solenoid2;
+	Solenoid pushCube;
 	Victor elevatorsMotor;
 	DigitalInput scaleSensor;
 	DigitalInput switchSensor;
 	DigitalInput floorSensor;
 	
 	
-	public CubeSystem(Solenoid solenoid2,Solenoid solenoid1,Compressor compressor, Victor elevatorsMotor, DigitalInput scaleSensor, DigitalInput switchSensor, DigitalInput floorSensor)
+	public CubeSystem(Solenoid solenoid2,Solenoid solenoid1, Solenoid pushCube,Compressor compressor, Victor elevatorsMotor, DigitalInput scaleSensor, DigitalInput switchSensor, DigitalInput floorSensor)
 	{
 		this.compressor = compressor;
 		this.solenoid1 = solenoid1;
 		this.solenoid2= solenoid2;
+		this.pushCube=pushCube;
 		this.elevatorsMotor = elevatorsMotor;
 		this.scaleSensor = scaleSensor;
 		this.switchSensor=switchSensor;
 		this.floorSensor=floorSensor;
 		
 	}
-	
+	//checks if the pusher piston is opened
+	public boolean isOpenedPusher()
+	{
+		return pushCube.get();
+	}
+	public void setCubePusher(boolean isOpenedPusher)
+	{
+		if(isOpenedPusher){
+			pushCube.set(false);
+		}
+		else{
+			pushCube.set(true);
+		}
+	}
 	//checks if the platforms' pistons are opened
 	public boolean isOpened()
 	{
@@ -38,18 +53,18 @@ public class CubeSystem extends Subsystem {
 	}
 	
 	//set the pistons state
-	public void setPiston1(boolean isOpsened) 
+	public void setPiston1(boolean isOpened) 
 	{
-		if(isOpsened){
+		if(isOpened){
 			solenoid2.set(false);
 		}
 		else{
 			solenoid1.set(true);
 		}
 	}
-	public void setPiston2(boolean isOpsened) 
+	public void setPiston2(boolean isOpened) 
 	{
-		if(isOpsened){
+		if(isOpened){
 			solenoid1.set(false);
 		}
 		else{
@@ -82,6 +97,10 @@ public class CubeSystem extends Subsystem {
 		return scaleSensor.get();
 	}
 	
+	public void stopElevators()
+	{
+		this.elevatorsMotor.setSpeed(0);
+	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	

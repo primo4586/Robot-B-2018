@@ -1,6 +1,5 @@
 package org.usfirst.frc.team4586.robot.commands;
 
-import org.usfirst.frc.team4586.robot.OI;
 import org.usfirst.frc.team4586.robot.Robot;
 import org.usfirst.frc.team4586.robot.subsystems.CubeSystem;
 
@@ -11,12 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class CatchCube extends Command {
 	CubeSystem cubeSystem;
-	OI oi;
 	boolean isOpenedBothPistons;
 	boolean isToOpen;
     public CatchCube() {
    	 this.cubeSystem=Robot.cubeSystem;
-     this.oi=Robot.m_oi;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }

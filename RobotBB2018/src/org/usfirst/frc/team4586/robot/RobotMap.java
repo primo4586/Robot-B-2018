@@ -31,6 +31,7 @@ public class RobotMap {
 	public static Jaguar climbMotor2;
 	public static Solenoid openLeftPlatfrom;
 	public static Solenoid openRightPlatfrom;
+	public static Solenoid pushCube;
 	public static Victor elevatorsMotor;
 	public static AnalogGyro gyro;
 	public static Encoder drivingEncoder ;
@@ -40,11 +41,11 @@ public class RobotMap {
 	public static Compressor compressor;
 	public static Solenoid solenoidCube1;
 	public static Solenoid solenoidCube2;
-	public static Solenoid cubPusher;
+
 	
 	public static void Init()
 	{
-		//צריך לבדוק חיבורים
+		//TODO Check connections
 		leftFrontMotor = new Jaguar(2);
 		leftBackMotor = new Jaguar(4);
 		rightFrontMotor = new Jaguar(8);
@@ -62,6 +63,7 @@ public class RobotMap {
 		compressor = new  Compressor();
 		solenoidCube1 = new Solenoid(0);
 		solenoidCube2 = new Solenoid(0);
+		pushCube =new Solenoid(0);
 	}
 	
 	// For example to map the left and right motors, you could define the

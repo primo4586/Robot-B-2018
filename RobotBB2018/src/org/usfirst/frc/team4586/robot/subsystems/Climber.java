@@ -34,11 +34,11 @@ public class Climber extends Subsystem {
 	}
 	
 	//set the pistons state
-	public void setPiston(boolean isOpsened) 
+	public void setPiston(boolean isOpened) 
 	{
 		
-			openRightPlatfrom.set(!isOpsened);
-			openLeftPlatfrom.set(!isOpsened);
+			openRightPlatfrom.set(!isOpened);
+			openLeftPlatfrom.set(!isOpened);
 	}
 			
 		
@@ -65,6 +65,11 @@ public class Climber extends Subsystem {
 	public void setPlatformRight(boolean open)
 	{
 		this.openRightPlatfrom.set(open);
+	}
+	public void stopAllClimberMotors()
+	{
+		this.climbMotor1.setSpeed(0);
+		this.climbMotor2.setSpeed(0);
 	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

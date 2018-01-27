@@ -44,15 +44,14 @@ public class Robot extends TimedRobot {
 	 */
 	//@Override
 	public void robotInit() {
+		RobotMap.Init();
 		climber = new Climber(RobotMap.climbMotor1, RobotMap.climbMotor2, RobotMap.compressor,
 				RobotMap.openLeftPlatfrom, RobotMap.openRightPlatfrom);
 		
-		cubeSystem = new CubeSystem(RobotMap.solenoidCube2, RobotMap.solenoidCube1,
+		cubeSystem = new CubeSystem(RobotMap.solenoidCube2, RobotMap.solenoidCube1,RobotMap.pushCube,
 				RobotMap.compressor, RobotMap.elevatorsMotor, RobotMap.scaleSensor, RobotMap.switchSensor, RobotMap.floorSensor);
-		m_oi = new OI();
-		
 		driver = new Driver(RobotMap.leftFrontMotor,RobotMap. leftBackMotor,RobotMap. rightFrontMotor,RobotMap. rightBackMotor , RobotMap.gyro,RobotMap.drivingEncoder);
-		RobotMap.Init();
+		m_oi = new OI();
 		m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashBoardInit();
@@ -162,6 +161,7 @@ public class Robot extends TimedRobot {
 	   	
 	   	SmartDashboard.putData("Teleop Gyro PID", driver.getGyroController());
 	   	SmartDashboard.putBoolean("use gyro", false);
+	   	SmartDashboard.putBoolean("allow pre end game platforms", true);
 	}
 	
 	

@@ -20,6 +20,7 @@ import org.usfirst.frc.team4586.robot.commands.StopAllMotors;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc.team4586.robot.commands.CubePusher;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -32,6 +33,7 @@ public class OI {
 	public JoystickButton invert;
 	public JoystickButton calibrateGyro;
 	public JoystickButton resetEncoder;
+	public JoystickButton cubePusher;
 	
 	//operator
 	public Joystick joystickOpertor; 
@@ -50,6 +52,7 @@ public class OI {
 	invert = new JoystickButton(joystickDriver , 3);
 	calibrateGyro = new JoystickButton(joystickDriver , 6);
 	resetEncoder = new JoystickButton(joystickDriver , 2);
+	cubePusher = new JoystickButton(joystickDriver , 7);
 	
 	joystickOpertor = new Joystick(1);
 	liftToScale = new JoystickButton(joystickOpertor , 5);
@@ -64,14 +67,15 @@ public class OI {
 	invert.whenPressed(new Invert());
 	calibrateGyro.whenPressed(new CalibrateGyro());
 	resetEncoder.whenPressed(new ResetEncoder());
+	cubePusher.whenPressed(new CubePusher());
 	
 	//operator commands
-	liftToScale.whenPressed(new LiftToScale());
-	liftToFloor.whenPressed(new LiftToFloor());
-	liftToSwitch.whenPressed(new LiftToSwitch());
-	climb.whenPressed(new Climb());
+	liftToScale.toggleWhenPressed(new LiftToScale());
+	liftToFloor.toggleWhenPressed(new LiftToFloor());
+	liftToSwitch.toggleWhenPressed(new LiftToSwitch());
+	climb.whileHeld(new Climb());
 	catchCube.whenPressed(new CatchCube());
-	openPlatform.toggleWhenPressed(new OpenPlatforms());
+	openPlatform.whenPressed(new OpenPlatforms());
 
 	
 	}
