@@ -12,6 +12,7 @@ public class CatchCube extends Command {
 	CubeSystem cubeSystem;
 	boolean isOpenedBothPistons;
 	boolean isToOpen;
+	
     public CatchCube() {
    	 this.cubeSystem=Robot.cubeSystem;
         // Use requires() here to declare subsystem dependencies

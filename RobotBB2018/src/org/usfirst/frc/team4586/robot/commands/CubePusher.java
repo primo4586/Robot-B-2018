@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 public class CubePusher extends Command {
 	CubeSystem cubeSystem;
 	boolean isOpened;
-    public CubePusher() {
-   	 this.cubeSystem=Robot.cubeSystem;
-   
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+	
+    public CubePusher(){
+      	 this.cubeSystem=Robot.cubeSystem;
+      	 this.isOpened = false;
     }
 
     // Called just before this Command runs the first time
