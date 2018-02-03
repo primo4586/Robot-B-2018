@@ -9,27 +9,28 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class CubePusher extends Command {
+	
 	CubeSystem cubeSystem;
 	boolean isOpened;
 	
     public CubePusher(){
       	 this.cubeSystem=Robot.cubeSystem;
-      	 this.isOpened = false;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	isOpened =cubeSystem.isOpenedPusher();
+    	setTimeout(0.5);
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	cubeSystem.setCubePusher(!isOpened);
+    	cubeSystem.setCubePusher(!this.cubeSystem.isOpenedPusher());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true

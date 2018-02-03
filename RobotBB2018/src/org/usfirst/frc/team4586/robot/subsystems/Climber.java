@@ -1,82 +1,71 @@
 package org.usfirst.frc.team4586.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *	Climber System
+ * Climber System
  */
 public class Climber extends Subsystem {
-	Compressor compressor;
-	Jaguar climbMotor1;
-	Jaguar climbMotor2;
-	Solenoid openRightPlatfrom;
-	Solenoid openLeftPlatfrom;
-	boolean isOpen;
-	
+    Compressor compressor;
+    Victor climbMotor1;
+    Victor climbMotor2;
+    Solenoid openPlatfroms;
+    Solenoid closePlatfroms;
+    boolean isOpen;
 
-	public Climber(Jaguar climbMotor1,Jaguar climbMotor2 ,Compressor compressor, Solenoid openLeftPlatfrom, Solenoid openRightPlatfrom) 
-	{
-		this.isOpen=false;
-		this.climbMotor1 =climbMotor1;
-		this.climbMotor2 =climbMotor2;
-		this.compressor = compressor;
-		this.openRightPlatfrom = openRightPlatfrom;
-		this. openLeftPlatfrom = openLeftPlatfrom;
-	}
+    public Climber(Victor climbMotor1, Victor climbMotor2, Compressor compressor, Solenoid closePlatfroms,
+	    Solenoid openPlatfroms) {
+	this.isOpen = false;
+	this.climbMotor1 = climbMotor1;
+	this.climbMotor2 = climbMotor2;
+	this.compressor = compressor;
+	this.openPlatfroms = openPlatfroms;
+	this.closePlatfroms = closePlatfroms;
+    }
 
-	//checks if the platforms' pistons are opened
-	public boolean isOpened()
-	{
-		return (openRightPlatfrom.get() && openLeftPlatfrom.get());
-	}
-	
-	//set the pistons state
-	public void setPiston(boolean isOpened) 
-	{
-		
-			openRightPlatfrom.set(!isOpened);
-			openLeftPlatfrom.set(!isOpened);
-	}
-			
-		
-	
-	public void setSpeedClimb(double speed)
-	{
-		this.climbMotor1.set(speed);
-		this.climbMotor2.set(speed);
-	}
+    // checks if the platforms' pistons are opened
+    public boolean isOpened() {
+	return openPlatfroms.get();
+    }
 
-	public void setPlatforms(boolean open)
-	{
-		this.openLeftPlatfrom.set(open);
-		this.openRightPlatfrom.set(open);
-	}
+    // set the pistons state
+    public void setPiston(boolean isOpened) {
 
-	public void setPlatformLeft(boolean open)
-	{
-		this.openLeftPlatfrom.set(open);
-	
-	}
-	
+	openPlatfroms.set(!isOpened);
+	closePlatfroms.set(isOpened);
+    }
 
-	public void setPlatformRight(boolean open)
-	{
-		this.openRightPlatfrom.set(open);
-	}
-	public void stopAllClimberMotors()
-	{
-		this.climbMotor1.setSpeed(0);
-		this.climbMotor2.setSpeed(0);
-	}
+    public void setSpeedClimb(double speed) {
+	this.climbMotor1.set(speed);
+	this.climbMotor2.set(speed);
+    }
+
+    public void setPlatforms(boolean open) {
+	this.closePlatfroms.set(!open);
+	this.openPlatfroms.set(open);
+    }
+
+    public void setPlatformLeft(boolean open) {
+	this.closePlatfroms.set(open);
+
+    }
+
+    public void setPlatformRight(boolean open) {
+	this.openPlatfroms.set(open);
+    }
+
+    public void stopAllClimberMotors() {
+	this.climbMotor1.setSpeed(0);
+	this.climbMotor2.setSpeed(0);
+    }
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
+	// Set the default command for a subsystem here.
+	// setDefaultCommand(new MySpecialCommand());
     }
 }
-

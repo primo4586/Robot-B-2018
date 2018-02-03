@@ -22,19 +22,19 @@ import edu.wpi.first.wpilibj.Victor;
  * floating around.
  */
 public class RobotMap {
-	
+
 	public static Jaguar leftFrontMotor;
 	public static Jaguar leftBackMotor;
 	public static Jaguar rightFrontMotor;
 	public static Jaguar rightBackMotor;
-	public static Jaguar climbMotor1;
-	public static Jaguar climbMotor2;
-	public static Solenoid openLeftPlatfrom;
-	public static Solenoid openRightPlatfrom;
+	public static Victor climbMotor1;
+	public static Victor climbMotor2;
+	public static Solenoid openPlatfroms;
+	public static Solenoid closePlatfroms;
 	public static Solenoid pushCube;
 	public static Victor elevatorsMotor;
 	public static AnalogGyro gyro;
-	public static Encoder drivingEncoder ;
+	public static Encoder drivingEncoder;
 	public static DigitalInput scaleSensor;
 	public static DigitalInput switchSensor;
 	public static DigitalInput floorSensor;
@@ -42,38 +42,36 @@ public class RobotMap {
 	public static Solenoid solenoidCube1;
 	public static Solenoid solenoidCube2;
 
-	
-	public static void Init()
-	{
-		//TODO Check connections
-		leftFrontMotor = new Jaguar(2);
-		leftBackMotor = new Jaguar(4);
-		rightFrontMotor = new Jaguar(8);
-		rightBackMotor = new Jaguar(1);
-		climbMotor1 = new Jaguar(9);
-		climbMotor2 = new Jaguar(5);
-		openLeftPlatfrom =  new Solenoid(9);
-		openRightPlatfrom =  new Solenoid(5);
-		elevatorsMotor = new Victor(2);
-		gyro = new AnalogGyro(0);
-		drivingEncoder = new Encoder(0,0);
-		scaleSensor = new DigitalInput(0);
-		switchSensor= new DigitalInput(0);
-		floorSensor= new DigitalInput(0);
-		compressor = new  Compressor();
-		solenoidCube1 = new Solenoid(0);
-		solenoidCube2 = new Solenoid(0);
-		pushCube =new Solenoid(0);
+	public static void Init() {
+		// TODO Check connections
+		leftFrontMotor = new Jaguar(3);
+		leftBackMotor = new Jaguar(7);
+		rightFrontMotor = new Jaguar(4);
+		rightBackMotor = new Jaguar(6);
+		climbMotor1 = new Victor(2);
+		climbMotor2 = new Victor(0);
+		openPlatfroms = new Solenoid(5);
+		closePlatfroms = new Solenoid(4);
+		elevatorsMotor = new Victor(5);
+		gyro = new AnalogGyro(1);
+		drivingEncoder = new Encoder(1, 2);
+		scaleSensor = new DigitalInput(3);
+		switchSensor = new DigitalInput(4);
+		floorSensor = new DigitalInput(5);
+		compressor = new Compressor();
+		solenoidCube1 = new Solenoid(2);
+		solenoidCube2 = new Solenoid(1);
+		pushCube = new Solenoid(6);
 	}
 	
+
 	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
+	// following variables to use with your subsystem.
+	// public static leftMotor = 1;
+	// public static rightMotor = 2;
 
 	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
+	// number and the module. For example you with a :
+	// public static rangefinderPort = 1;
+	// public static rangefinderModule = 1;
 }
-

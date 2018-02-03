@@ -11,11 +11,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class OpenPlatforms extends Command {
-	private Climber climber;
+    private Climber climber;
+
     public OpenPlatforms() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	this.climber = Robot.climber;
+	// Use requires() here to declare subsystem dependencies
+	// eg. requires(chassis);
+	this.climber = Robot.climber;
     }
 
     // Called just before this Command runs the first time
@@ -24,14 +25,14 @@ public class OpenPlatforms extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Timer.getMatchTime()<32 || SmartDashboard.getBoolean("allow pre end game platforms", false) ) {
-    		climber.setPlatforms(true);
-    	}
+	if (Timer.getMatchTime() < 32 || SmartDashboard.getBoolean("allow pre end game platforms", false)) {
+	    climber.setPlatforms(!climber.isOpened());
+	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+	return true;
     }
 
     // Called once after isFinished returns true

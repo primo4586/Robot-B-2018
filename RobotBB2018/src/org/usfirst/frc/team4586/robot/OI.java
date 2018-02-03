@@ -49,17 +49,17 @@ public class OI {
 	{
 	joystickDriver = new Joystick(0);
 	stopAllMotors = new JoystickButton(joystickDriver , 1);
-	invert = new JoystickButton(joystickDriver , 3);
-	calibrateGyro = new JoystickButton(joystickDriver , 6);
+	invert = new JoystickButton(joystickDriver , 4);
+	calibrateGyro = new JoystickButton(joystickDriver , 3);
 	resetEncoder = new JoystickButton(joystickDriver , 2);
-	cubePusher = new JoystickButton(joystickDriver , 7);
+	cubePusher = new JoystickButton(joystickDriver , 5);
+	catchCube = new JoystickButton(joystickDriver , 6);
 	
 	joystickOpertor = new Joystick(1);
 	liftToScale = new JoystickButton(joystickOpertor , 5);
 	liftToFloor = new JoystickButton(joystickOpertor , 4);
 	liftToSwitch = new JoystickButton(joystickOpertor ,3);
 	climb = new JoystickButton(joystickOpertor , 6);
-	catchCube = new JoystickButton(joystickOpertor , 1);
 	openPlatform = new JoystickButton(joystickOpertor , 2);
 	
 	//driver commands
@@ -68,20 +68,16 @@ public class OI {
 	calibrateGyro.whenPressed(new CalibrateGyro());
 	resetEncoder.whenPressed(new ResetEncoder());
 	cubePusher.whenPressed(new CubePusher());
+	catchCube.whenPressed(new CatchCube());
 	
 	//operator commands
 	liftToScale.toggleWhenPressed(new LiftToScale());
 	liftToFloor.toggleWhenPressed(new LiftToFloor());
 	liftToSwitch.toggleWhenPressed(new LiftToSwitch());
 	climb.whileHeld(new Climb());
-	catchCube.whenPressed(new CatchCube());
 	openPlatform.whenPressed(new OpenPlatforms());
 	
 	}
-	
-
-	
-
 }
 
 

@@ -45,8 +45,9 @@ public class Robot extends TimedRobot {
 	//@Override
 	public void robotInit() {
 		RobotMap.Init();
+		RobotMap.compressor.setClosedLoopControl(true);
 		climber = new Climber(RobotMap.climbMotor1, RobotMap.climbMotor2, RobotMap.compressor,
-				RobotMap.openLeftPlatfrom, RobotMap.openRightPlatfrom);
+				RobotMap.openPlatfroms, RobotMap.closePlatfroms);
 		
 		cubeSystem = new CubeSystem(RobotMap.solenoidCube2, RobotMap.solenoidCube1,RobotMap.pushCube,
 				RobotMap.compressor, RobotMap.elevatorsMotor, RobotMap.scaleSensor, RobotMap.switchSensor, RobotMap.floorSensor);
@@ -143,9 +144,10 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void SmartDashBoardInit() {
-		SmartDashboard.putNumber("Elavator Speed", 0.7);
+		SmartDashboard.putNumber("Elavator Speed", 1);
 		SmartDashboard.putNumber("Driving direction", 1);
 	   	SmartDashboard.putNumber("Max speed",0.7);
+	   	SmartDashboard.putNumber("Max Rotation Speed", 0.67);
 	   	SmartDashboard.putNumber("Speed climb back", 0);
 	   	SmartDashboard.putNumber("Speed climb foreward", 0);
 	   	
