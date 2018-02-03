@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 
 //ANALOG CONTROL IN ELEVATOR
-
 public class LiftCubeByJoystick extends Command {
 	 private CubeSystem cubeSystem;
 	 private OI oi;
