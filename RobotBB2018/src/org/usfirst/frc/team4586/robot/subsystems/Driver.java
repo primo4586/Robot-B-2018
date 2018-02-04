@@ -27,6 +27,10 @@ public class Driver extends Subsystem {
 	private DrivingGyroPID gyroSource;
 	private DrivingRotationPID rotationPID;
 	PIDController gyroController;
+	
+	private DrivingEncoderPID encoderSource;
+	private DrivingSpeedPID speedPID;
+	PIDController encoderController;
 
 	public Driver(Jaguar leftFrontMotor,Jaguar leftBackMotor ,Jaguar rightFrontMotor,Jaguar rightBackMotor ,AnalogGyro gyro,Encoder drivingEncoder) 
 	{
@@ -41,6 +45,9 @@ public class Driver extends Subsystem {
 		this.leftController = new SpeedControllerGroup(this.leftBackMotor, this.leftFrontMotor);
 		this.diffDrive = new DifferentialDrive(this.leftController, this.rightController);
 		
+		this.encoderSource = new DrivingEncoderPID(drivingEncoder);
+		this.speedPID =  new DrivingSpeedPID();
+		this.encoderController = new PIDController(0, 0, 0, this.encoderSource, this.speedPID);
 		this.gyroSource = new DrivingGyroPID(this.gyro);
 		this.rotationPID = new DrivingRotationPID();
 		this.gyroController = new PIDController(0, 0, 0, this.gyroSource, this.rotationPID);
@@ -50,20 +57,41 @@ public class Driver extends Subsystem {
 		return this.gyroController;
 	}
 	
-	public void setSetPoint(double setpoint) {
+	public PIDController getEncoderController(){
+		return this.encoderController;
+	}
+	
+	public void setSetPointGyro(double setpoint) {
 		this.gyroController.setSetpoint(setpoint);
 	}
 	
-	public void enable() {
+	public void setEncoderControllerSetPoint(double setpoint) {
+		this.encoderController.setSetpoint(setpoint);
+	}
+	
+	public void enableGyro() {
 		this.gyroController.enable();
 	}
 	
-	public void disable() {
+	public void enableEncoder() {
+		this.encoderController.enable();
+	}
+	
+	public void disableEncoder() {
+		this.encoderController.disable();
+	}
+	
+	
+	public void disableGyro() {
 		this.gyroController.disable();
 	}
 	
 	public double getRotation() {
 		return this.rotationPID.getRotation();
+	}
+	
+	public double getSpeed() {
+		return this.speedPID.getSpeed();
 	}
 	
 	//wheels

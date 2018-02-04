@@ -35,15 +35,14 @@ public class CubeSystem extends Subsystem {
 
     // checks if the pusher piston is opened
     public boolean isOpenedPusher() {
-	return pushCube.get();
+    	System.out.println("push " + pushCube.get());
+    	return pushCube.get();
     }
 
     public void setCubePusher(boolean isOpenedPusher) {
-	if (isOpenedPusher) {
-	    pushCube.set(true);//
-	} else {
-	    pushCube.set(false);//
-	}
+		System.out.println("pusher turn to " + isOpenedPusher);
+    	pushCube.set(isOpenedPusher);
+    	System.out.println("pusher is " + pushCube.get());
     }
 
     // checks if the platforms' pistons are opened
